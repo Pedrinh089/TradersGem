@@ -24,15 +24,22 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080005;
-        public static final int btCancel=0x7f080002;
-        public static final int btLogin=0x7f080003;
-        public static final int btNewUser=0x7f080004;
-        public static final int etPassword=0x7f080001;
-        public static final int etUserName=0x7f080000;
+        public static final int action_settings=0x7f08000a;
+        public static final int btCancel=0x7f080006;
+        public static final int btLogin=0x7f080007;
+        public static final int btMyStocks=0x7f080000;
+        public static final int btNewUser=0x7f080008;
+        public static final int btSellStocks=0x7f080002;
+        public static final int btStatistics=0x7f080003;
+        public static final int btWatchStocks=0x7f080001;
+        public static final int etConfPassword=0x7f080009;
+        public static final int etPassword=0x7f080005;
+        public static final int etUserName=0x7f080004;
     }
     public static final class layout {
-        public static final int activity_login=0x7f030000;
+        public static final int activity_homescreen=0x7f030000;
+        public static final int activity_login=0x7f030001;
+        public static final int activity_newuser=0x7f030002;
     }
     public static final class menu {
         public static final int login=0x7f070000;
@@ -40,13 +47,28 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
-        public static final int bt_Cancel=0x7f050007;
-        public static final int bt_Login=0x7f050006;
-        public static final int bt_NewUser=0x7f050008;
-        public static final int hello_world=0x7f050002;
-        public static final int tv_Heading=0x7f050003;
-        public static final int tv_Password=0x7f050005;
-        public static final int tv_UserName=0x7f050004;
+        public static final int bt_Cancel=0x7f050006;
+        /**  Home Screen Strings 
+         */
+        public static final int bt_HM_MyStocks=0x7f05000e;
+        public static final int bt_HM_SellStocks=0x7f050010;
+        public static final int bt_HM_Statistics=0x7f050011;
+        public static final int bt_HM_WatchStocks=0x7f05000f;
+        public static final int bt_Login=0x7f050005;
+        public static final int bt_NU_Cancel=0x7f05000d;
+        public static final int bt_NU_Create=0x7f05000c;
+        public static final int bt_NewUser=0x7f050007;
+        /**  Login Screen Strings 
+         */
+        public static final int tv_Heading=0x7f050002;
+        public static final int tv_NU_ConfPassword=0x7f05000b;
+        /**  New User Screen Strings 
+         */
+        public static final int tv_NU_Heading=0x7f050008;
+        public static final int tv_NU_Password=0x7f05000a;
+        public static final int tv_NU_UserName=0x7f050009;
+        public static final int tv_Password=0x7f050004;
+        public static final int tv_UserName=0x7f050003;
     }
     public static final class style {
         /** 

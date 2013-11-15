@@ -1,6 +1,7 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     
+    android:layout_gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     
@@ -17,14 +18,14 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin" >
     
-    <TextView
+    <!-- <TextView
         android:text=""
         android:textSize="92sp"
         
         android:layout_columnSpan="6"
         android:layout_rowSpan="6"
         android:layout_gravity="center_horizontal"
-        />
+        /> -->
     
     <TextView
         android:text="@string/tv_Heading"
@@ -51,7 +52,7 @@
         android:textSize="16sp"
         android:textColor="#FFFFFF"
         
-        android:layout_width="wrap_content"        
+        android:layout_width="wrap_content" 
         android:layout_columnSpan="4"
         android:layout_gravity="fill"
         android:ems="12"

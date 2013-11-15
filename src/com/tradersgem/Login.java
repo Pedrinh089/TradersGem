@@ -2,6 +2,7 @@ package com.tradersgem;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -55,6 +56,9 @@ public class Login extends Activity
 				if(userAccount.verifyCredentials(usr.getText().toString(), pass.getText().toString()))
 				{
 					Log.d("Account Login", "Account Login Successful!!!");
+					
+					Intent intent = new Intent(Login.this, Home.class);
+					startActivity(intent);
 				}
 				else
 				{
@@ -69,7 +73,10 @@ public class Login extends Activity
 			}
 			else if(((Button)v).getId() == btNewAccount.getId())
 			{
-				Log.d("New User Account", "New User Account Button Clicked");
+				//Log.d("New User Account", "New User Account Button Clicked");
+				Intent intent = new Intent(Login.this, NewUser.class);
+				startActivity(intent);
+				
 			}
 		}
 	};
