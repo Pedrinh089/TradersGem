@@ -8,6 +8,9 @@
     <string name="tv_Heading">Current User Login</string>
     <string name="tv_UserName">User Name</string>
     <string name="tv_Password">Password</string>
+    <string name="tv_EnterUserName">Enter User Name</string>
+    <string name="tv_EnterPassword">Enter Password</string>
+    <string name="tv_ConfirmPassword">Confirm Password</string>
     <string name="bt_Login">Login</string>
     <string name="bt_Cancel">Cancel</string>
     <string name="bt_NewUser"><u>Create New Account</u></string>

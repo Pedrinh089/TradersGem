@@ -18,10 +18,10 @@ public class Login extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		
+		
 		// Get user name/password DB
-		userAccount = new UserAccounts();
-		
-		
+		userAccount = new UserAccounts(getBaseContext());
+				
 		// Get panel buttons
 		btLogin = (Button) findViewById(R.id.btLogin);
 		btCancel = (Button) findViewById(R.id.btCancel);
@@ -32,6 +32,12 @@ public class Login extends Activity
 		btCancel.setOnClickListener(eventHandler);
 		btNewAccount.setOnClickListener(eventHandler);		
 	}
+	
+	/*@Override
+	protected void onResume()
+	{
+		//userAccount.refresh();
+	}*/
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -57,7 +63,7 @@ public class Login extends Activity
 				{
 					Log.d("Account Login", "Account Login Successful!!!");
 					
-					Intent intent = new Intent(Login.this, Home.class);
+					Intent intent = new Intent(Login.this, Home.class).putExtra("UserAccount", userAccount.getCurrentUser());
 					startActivity(intent);
 				}
 				else
@@ -68,8 +74,13 @@ public class Login extends Activity
 			else if(((Button)v).getId() == btCancel.getId())
 			{
 				// Close Application
+				Log.d("Num Of Accounts", String.valueOf(userAccount.getNumOfAccounts()));
+				//userAccount.createNewAccount("Test", "1234", "1234");
+				Log.d("Num Of Accounts", String.valueOf(userAccount.getNumOfAccounts()));
+				
 				finish();
-				System.exit(0);
+				System.exit(0);		
+				
 			}
 			else if(((Button)v).getId() == btNewAccount.getId())
 			{

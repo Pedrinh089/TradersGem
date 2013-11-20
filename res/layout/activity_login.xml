@@ -52,6 +52,8 @@
         android:textSize="16sp"
         android:textColor="#FFFFFF"
         
+        android:hint="@string/tv_EnterUserName"
+        
         android:layout_width="wrap_content" 
         android:layout_columnSpan="4"
         android:layout_gravity="fill"
@@ -73,6 +75,8 @@
         android:textSize="16sp"
         android:textColor="#FFFFFF"
         
+        android:hint="@string/tv_EnterPassword"
+                
         android:layout_width="wrap_content"        
         android:layout_columnSpan="4"
         android:layout_gravity="fill"

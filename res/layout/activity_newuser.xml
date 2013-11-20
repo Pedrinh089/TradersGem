@@ -174,11 +174,13 @@
     	android:layout_gravity="left" />
     
 	    <EditText 
-	        android:id="@+id/etUserName"
-	        android:textSize="20sp"
+	        android:id="@+id/NU_EtUserName"
+	        android:textSize="16sp"
 	        android:textColor="#FFFFFF"
 	        
-	        android:layout_weight="3"
+	        android:hint="@string/tv_EnterUserName"
+        	
+        	android:layout_weight="3"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	    	android:ems="12"
@@ -201,11 +203,13 @@
 	    	android:layout_gravity="left" />
     
 	    <EditText 
-	        android:id="@+id/etPassword"
-	        android:textSize="20sp"
+	        android:id="@+id/NU_EtPassword"
+	        android:textSize="16sp"
 	        android:textColor="#FFFFFF"
 	        
-	        android:layout_weight="3"
+	        android:hint="@string/tv_EnterPassword"
+        	
+        	android:layout_weight="3"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:inputType="textPassword" />
@@ -227,11 +231,13 @@
 	    	android:layout_gravity="left" />
     
 	    <EditText 
-	        android:id="@+id/etConfPassword"
-	        android:textSize="20sp"
+	        android:id="@+id/NU_EtConfPassword"
+	        android:textSize="16sp"
 	        android:textColor="#FFFFFF"
 	        
-	        android:layout_weight="3"
+	        android:hint="@string/tv_ConfirmPassword"
+        	
+        	android:layout_weight="3"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:inputType="textPassword" />
@@ -243,22 +249,22 @@
 	    android:layout_height="wrap_content">
 		
 		<Button        
-	        android:id="@+id/btCancel"
-	        android:textColor="#FFFFFF"
-	        
-	        android:layout_weight="3"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	    	android:text="@string/bt_NU_Create"/>
-    
-	    <Button         
-	        android:id="@+id/btLogin"
+	        android:id="@+id/NU_BtCancel"
 	        android:textColor="#FFFFFF"
 	        
 	        android:layout_weight="3"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	    	android:text="@string/bt_NU_Cancel"/>
+    
+	    <Button         
+	        android:id="@+id/NU_BtCreate"
+	        android:textColor="#FFFFFF"
+	        
+	        android:layout_weight="3"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	    	android:text="@string/bt_NU_Create"/>
 		
 	</LinearLayout>
 	
