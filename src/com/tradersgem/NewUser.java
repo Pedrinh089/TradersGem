@@ -18,7 +18,7 @@ public class NewUser extends Activity
 	    setContentView(R.layout.activity_newuser);
 	    
 	    //userAccount = (UserAccounts) getIntent().getSerializableExtra("UserAccounts");
-	    userAccount = new UserAccounts(getBaseContext());
+	    userAccountsDB = new UserAccountsDB(getBaseContext());
 	    
 	    btCreate = (Button) findViewById(R.id.NU_BtCreate);
 	    btCancel = (Button) findViewById(R.id.NU_BtCancel);
@@ -40,12 +40,12 @@ public class NewUser extends Activity
 				
 				try 
 				{
-					if(userAccount.createNewAccount(usr.getText().toString(), pass.getText().toString(), passConf.getText().toString()))
+					if(userAccountsDB.createNewAccount(usr.getText().toString(), pass.getText().toString(), passConf.getText().toString()))
 					{
 						Log.d("New User", "Account Creation Successful!!!");
-						Log.d("Num Of Accounts", String.valueOf(userAccount.getNumOfAccounts()));
+						Log.d("Num Of Accounts", String.valueOf(userAccountsDB.getNumOfAccounts()));
 						
-						Intent intent = new Intent(NewUser.this, Home.class).putExtra("UserAccount", userAccount.getCurrentUser());
+						Intent intent = new Intent(NewUser.this, Home.class).putExtra("UserAccount", userAccountsDB.getCurrentUser());
 						startActivity(intent);
 					}
 					else
@@ -63,7 +63,7 @@ public class NewUser extends Activity
 			else if(((Button)v).getId() == btCancel.getId())
 			{
 				// Close Application
-				Log.d("Num Of Accounts", String.valueOf(userAccount.getNumOfAccounts()));
+				Log.d("Num Of Accounts", String.valueOf(userAccountsDB.getNumOfAccounts()));
 				Log.d("Cancel Clicked", "Cancel Button Clicked");
 				finish();		
 				
@@ -71,7 +71,7 @@ public class NewUser extends Activity
 		}
 	};
 	
-	private UserAccounts userAccount;	
+	private UserAccountsDB userAccountsDB;	
 	
 	private Button btCreate;
 	private Button btCancel;

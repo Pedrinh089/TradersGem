@@ -19,8 +19,14 @@ public class StockList extends Activity
 	    // TODO Auto-generated method stub
 	}
 	
-	public void loadData(ArrayList<String> arrList)
+	public void loadData(ArrayList<Stock> stockList)
 	{
+		ArrayList<String> arrList = new ArrayList<String>();
+		
+		for(Stock s: stockList)
+			arrList.add(s.getName());
+			
+			
 		ArrayAdapter<String> arrAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrList);
 	    
 	    listView = (ListView) findViewById(R.id.listOfStocks);

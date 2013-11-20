@@ -20,7 +20,7 @@ public class Login extends Activity
 		
 		
 		// Get user name/password DB
-		userAccount = new UserAccounts(getBaseContext());
+		userAccountsDB = new UserAccountsDB(getBaseContext());
 				
 		// Get panel buttons
 		btLogin = (Button) findViewById(R.id.btLogin);
@@ -59,11 +59,11 @@ public class Login extends Activity
 				EditText usr = (EditText) findViewById(R.id.etUserName);
 				EditText pass = (EditText) findViewById(R.id.etPassword);
 				
-				if(userAccount.verifyCredentials(usr.getText().toString(), pass.getText().toString()))
+				if(userAccountsDB.verifyCredentials(usr.getText().toString(), pass.getText().toString()))
 				{
 					Log.d("Account Login", "Account Login Successful!!!");
 					
-					Intent intent = new Intent(Login.this, Home.class).putExtra("UserAccount", userAccount.getCurrentUser());
+					Intent intent = new Intent(Login.this, Home.class).putExtra("UserAccount", userAccountsDB.getCurrentUser());
 					startActivity(intent);
 				}
 				else
@@ -74,9 +74,9 @@ public class Login extends Activity
 			else if(((Button)v).getId() == btCancel.getId())
 			{
 				// Close Application
-				Log.d("Num Of Accounts", String.valueOf(userAccount.getNumOfAccounts()));
+				Log.d("Num Of Accounts", String.valueOf(userAccountsDB.getNumOfAccounts()));
 				//userAccount.createNewAccount("Test", "1234", "1234");
-				Log.d("Num Of Accounts", String.valueOf(userAccount.getNumOfAccounts()));
+				Log.d("Num Of Accounts", String.valueOf(userAccountsDB.getNumOfAccounts()));
 				
 				finish();
 				System.exit(0);		
@@ -93,7 +93,7 @@ public class Login extends Activity
 	};
 	
 	// User Credentials Variables
-	UserAccounts userAccount;
+	UserAccountsDB userAccountsDB;
 	
 	// UI Variables
 	private Button btLogin;

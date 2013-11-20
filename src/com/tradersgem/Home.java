@@ -47,12 +47,12 @@ public class Home extends Activity
 			if(((Button)v).getId() == btMyStocks.getId())
 			{
 				//Intent intent = new Intent(Home.this, StockList.class).putExtra("String", "MyStocks");
-				Intent intent = new Intent(Home.this, OwnedStockList.class).putExtra("String", "MyStocks");
+				Intent intent = new Intent(Home.this, OwnedStockList.class).putExtra("String", curUserAccount.getUserName());
 				startActivity(intent);
 			}
 			else if(((Button)v).getId() == btWatchList.getId())
 			{
-				Intent intent = new Intent(Home.this, WatchedStockList.class).putExtra("String", "WatchStocks");
+				Intent intent = new Intent(Home.this, WatchedStockList.class).putExtra("String", curUserAccount.getUserName());
 				startActivity(intent);
 			}
 			else if(((Button)v).getId() == btSellStocks.getId())

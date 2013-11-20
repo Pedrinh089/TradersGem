@@ -16,9 +16,10 @@ import android.content.Context;
  * @author Pedro Miranda
  *
  */
-public class UserAccounts implements Iterable<UserAccount>
+
+public class UserAccountsDB implements Iterable<UserAccount>
 {
-	public UserAccounts(Context context)
+	public UserAccountsDB(Context context)
 	{
 		listOfUserAccounts = new ArrayList<UserAccount>();
 		this.context = context;
@@ -149,4 +150,5 @@ public class UserAccounts implements Iterable<UserAccount>
 	private Context context;
 	private UserAccount curUser;
 	final private String fileName = "UserAccounts.dat";
+
 }
