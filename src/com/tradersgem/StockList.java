@@ -3,18 +3,11 @@ package com.tradersgem;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class StockList extends Activity 
+public abstract class StockList extends Activity 
 {
 
 	/** Called when the activity is first created. */
@@ -28,31 +21,22 @@ public class StockList extends Activity
 	
 	public void loadData(ArrayList<Stock> stockList)
 	{
-		this.stockList = stockList;
-		ArrayList<String> arrList = new ArrayList<String>();
-		
-		for(Stock s: this.stockList)
-			arrList.add(s.getName());
-			
-			
-		ArrayAdapter<String> arrAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrList);
-	    
-	    listView = (ListView) findViewById(R.id.listOfStocks);
-	    listView.setAdapter(arrAdapter);
-	    
-	    // Create OnClick Listener
-	    listView.setOnItemClickListener(eventHandler);
+		listView = (ListView) findViewById(R.id.listOfStocks);
+	    		
+		//CustomAdapter adapter = new CustomAdapter(CustomListView, customListViewValuesArr, res);
+		CustomAdapter adapter = new CustomAdapter(this, stockList, getResources());
+		listView.setAdapter(adapter);	    
 	}
 	
-	AdapterView.OnItemClickListener eventHandler = new AdapterView.OnItemClickListener()
+	public void showClickedItem(Stock stock)
 	{
-		public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
-		{
-			Toast.makeText(getApplicationContext(),
-					"Click ListItem Number " + stockList.get(position).getName(), Toast.LENGTH_LONG).show();
-		}
-	};
+		Toast.makeText(this, 
+				""+stock.getName() + "\n"
+				  +"Id:"+stock.getId() + "\n"
+				  +"Price:"+stock.getPrice(), Toast.LENGTH_SHORT).show();
+	}
+	
+	public abstract void onItemClick(int mPosition);
 	
 	private ListView listView;
-	private ArrayList<Stock> stockList;
 }

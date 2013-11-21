@@ -27,6 +27,8 @@
         <activity android:name="StockList"></activity>
         <activity android:name="OwnedStockList"></activity>
         <activity android:name="WatchedStockList"></activity>
+        <activity android:name="StockList2"></activity>
+        <activity android:name="CustomListViewAndroidExample"></activity>
     </application>
 
 </manifest>

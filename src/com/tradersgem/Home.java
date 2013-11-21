@@ -48,6 +48,7 @@ public class Home extends Activity
 			{
 				//Intent intent = new Intent(Home.this, StockList.class).putExtra("String", "MyStocks");
 				Intent intent = new Intent(Home.this, OwnedStockList.class).putExtra("String", curUserAccount.getUserName());
+				//Intent intent = new Intent(Home.this, CustomListViewAndroidExample.class).putExtra("String", curUserAccount.getUserName());
 				startActivity(intent);
 			}
 			else if(((Button)v).getId() == btWatchList.getId())

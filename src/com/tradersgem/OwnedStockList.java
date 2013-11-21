@@ -7,6 +7,7 @@ import java.util.Iterator;
 import android.os.Bundle;
 import android.util.Log;
 
+//public class OwnedStockList extends StockList
 public class OwnedStockList extends StockList
 {
 	/** Called when the activity is first created. */
@@ -15,24 +16,19 @@ public class OwnedStockList extends StockList
 	{
 	    super.onCreate(savedInstanceState);
 	    
-	    // Create Sample Data
-	    //ArrayList<String> arrListStr = new ArrayList<String>();
-	    //arrListStr.add("My Stock 1");
-	    //arrListStr.add("My Stock 2");
-	    
 	    if(getIntent().getExtras() != null)
 	    {
 	    	String userName = getIntent().getStringExtra("String");
 	    	stocksDB = new StocksDB(getBaseContext(), userName);
-	    	//Date date = new Date();
 	    	
-	    	//stocksDB.addNewStock(new Stock(1, "Masmio", 3.51f, date, 10, true));
+	    	// Add Sample Data
+	    	//stocksDB.addNewStock(new Stock(1, "Masmio", 3.51f, new Date(), 10, true));
 		    
-	    	ArrayList<Stock> arrListStr = getOwnedStocks();
+	    	ownedStockList = getOwnedStocks();
 		    
 	    	Log.d("Current User: ", userName);
 	    	
-	    	super.loadData(arrListStr);
+	    	super.loadData(ownedStockList);
 	    }
 	    
 	}
@@ -54,6 +50,14 @@ public class OwnedStockList extends StockList
 		return ownedStocks;
 	}
 	
+	public void onItemClick(int mPosition)
+	{
+		Stock tempValues = (Stock) ownedStockList.get(mPosition);
+		
+		super.showClickedItem(tempValues);
+	}
+	
 	private StocksDB stocksDB;
+	private ArrayList<Stock> ownedStockList;
 
 }

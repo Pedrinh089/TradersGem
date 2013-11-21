@@ -29,7 +29,10 @@ public final class R {
         public static final int NU_EtConfPassword=0x7f08000b;
         public static final int NU_EtPassword=0x7f08000a;
         public static final int NU_EtUserName=0x7f080009;
-        public static final int action_settings=0x7f08000f;
+        public static final int SI_text=0x7f08000f;
+        public static final int SI_text1=0x7f080010;
+        public static final int SI_text2=0x7f080011;
+        public static final int action_settings=0x7f080012;
         public static final int btCancel=0x7f080006;
         public static final int btLogin=0x7f080007;
         public static final int btMyStocks=0x7f080000;
@@ -46,6 +49,7 @@ public final class R {
         public static final int activity_login=0x7f030001;
         public static final int activity_newuser=0x7f030002;
         public static final int activity_stocklist=0x7f030003;
+        public static final int stockitem=0x7f030004;
     }
     public static final class menu {
         public static final int login=0x7f070000;
