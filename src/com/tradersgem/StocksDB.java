@@ -11,8 +11,20 @@ import java.util.Iterator;
 
 import android.content.Context;
 
+/**
+ * Model for the User's Stocks, this class is used to communicate with the DB to fetch information, manage user's stocks by providing the following
+ * functionality. It allows the adding new stocks to the user's porfolio, searching for stocks, getting quantities of owned/watched stocks, and 
+ * saving/loading stocks from the stock DB.
+ * @author pedro
+ *
+ */
 public class StocksDB implements Iterable<Stock>
 {
+	/**
+	 * 
+	 * @param context
+	 * @param userName
+	 */
 	public StocksDB(Context context, String userName)
 	{
 		fileName = userName + ".dat";

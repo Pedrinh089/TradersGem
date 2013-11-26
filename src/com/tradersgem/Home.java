@@ -7,6 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * This is the controller for the home screen for the current user. This class connects with the Home view to display the UI to the user and it
+ * receives commands from the user including My Stocks, Watch List, Sell Stocks and Statistics. This Controller receives the current user account
+ * information from their the Login or NewUser Controller.
+ * @author pedro
+ *
+ */
 public class Home extends Activity 
 {
 
@@ -19,54 +26,64 @@ public class Home extends Activity
 	    // TODO Auto-generated method stub
 	    setContentView(R.layout.activity_homescreen);
 	    
+	    // Check if current user account has been sent in from either the Login or NewUser controller.
 	    if(getIntent().getExtras() != null)
 	    {
+	    	// The serialized account information has been sent in, retrieve the account.
 	    	curUserAccount = (UserAccount) getIntent().getSerializableExtra("UserAccount");
 	    	Log.d("Current User: ", curUserAccount.getUserName());
 	    }
 	    
-	    // Connect Buttons to action listener
-	    btMyStocks = (Button) findViewById(R.id.btMyStocks);
+	    // Get panel buttons from the activity_home view
+		btMyStocks = (Button) findViewById(R.id.btMyStocks);
 	    btWatchList = (Button) findViewById(R.id.btWatchStocks);
 	    btSellStocks = (Button) findViewById(R.id.btSellStocks);
 	    btStatistics = (Button) findViewById(R.id.btStatistics);
 	    
-	    btMyStocks.setOnClickListener(eventHandler);
+	    // Create Action Listeners for activity_home view
+		btMyStocks.setOnClickListener(eventHandler);
 	    btWatchList.setOnClickListener(eventHandler);
 	    btSellStocks.setOnClickListener(eventHandler);
 	    btStatistics.setOnClickListener(eventHandler);
 	}
 	
 	/**
-	 * 
+	 * On click listener to keep track of user clicks on the activity_home View. 
 	 */
 	View.OnClickListener eventHandler = new View.OnClickListener()
 	{
 		public void onClick(View v)
 		{
+			// User clicked on the MyStocks button
 			if(((Button)v).getId() == btMyStocks.getId())
 			{
+				// Pass the current user account to the OwnedStockList controller.
 				//Intent intent = new Intent(Home.this, StockList.class).putExtra("String", "MyStocks");
 				Intent intent = new Intent(Home.this, OwnedStockList.class).putExtra("String", curUserAccount.getUserName());
 				//Intent intent = new Intent(Home.this, CustomListViewAndroidExample.class).putExtra("String", curUserAccount.getUserName());
 				startActivity(intent);
 			}
+			// User clicked on the WatchList button
 			else if(((Button)v).getId() == btWatchList.getId())
 			{
+				// Pass the current user account to the WatchList controller.
 				Intent intent = new Intent(Home.this, WatchedStockList.class).putExtra("String", curUserAccount.getUserName());
 				startActivity(intent);
 			}
+			// User clicked on the SellStocks button
 			else if(((Button)v).getId() == btSellStocks.getId())
 			{
-				
+				// Pass the current user account to the Sell Stocks controller.				
 			}
+			// User clicked on the Statistics button
 			else if(((Button)v).getId() == btStatistics.getId())
 			{
-				
+				// Pass the current user account to the Statistics controller.
 			}
 		}
 	};
 	
+	// User Account variables
 	private UserAccount curUserAccount;
 	
 	// User Interface Variables

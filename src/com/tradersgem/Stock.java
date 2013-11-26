@@ -3,8 +3,25 @@ package com.tradersgem;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * This is the model for an individual stock. This class holds the information for an individual user stock, it holds such things stock id,
+ * stock name, price, date purchased, quantity, and if it is owned or it part of the watch list. This class is immutable and serialized.
+ * @author pedro
+ *
+ */
 public class Stock  implements Serializable, Cloneable 
 {
+	/**
+	 * Constructor for a stock.
+	 * @param id - An integer representing the unique id of the stock.
+	 * @param name - A String representing the unique user name of the stock.
+	 * @param price - A float containing the individual unit price of one stock.
+	 * @param date - A date containing the purchase date of the stocks.
+	 * @param qty - A integer containing the quantity of the stock that was purchased.
+	 * @param isOwned - A boolean indicating if the stock is owned or it just on the watch list.
+	 * @precondition - The Id & name are unique, id > 0, name != null, name != "", date = today's date, qty > 0, isOwned is correct.
+	 * @postcondtion - A new stock with the parameters described in the constructor.
+	 */
 	public Stock(int id, String name, float price, Date date, int qty, boolean isOwned)
 	{
 		this.id = id;
@@ -15,16 +32,40 @@ public class Stock  implements Serializable, Cloneable
 		this.isOwned = isOwned;
 	}
 	
+	/**
+	 * Get the unique Id of the stock.
+	 * @return - An integer containing the Id of the stock.
+	 */
 	public int getId() { return id; }
 	
-	public String getName() { return name; }
+	/**
+	 * Gets the unique Name of the stock
+	 * @return - A string containing the name of stock
+	 */
+	public String getName() { return new String(name); }
 	
+	/**
+	 * Gets the price of the stock
+	 * @return - A float containing the price of stock
+	 */
 	public float getPrice() { return price; }
 	
+	/**
+	 * Gets the date that the stock was purchased
+	 * @return - A date containing the date that the stock was purchased
+	 */
 	public Date getPurchaseDate() { return (Date)purchaseDate.clone(); }
 	
+	/**
+	 * Gets the quantity of the stock that was purchased
+	 * @return - A integer indicating the amount of stock that was purchased or is on the watchlist
+	 */
 	public int getQuantity() { return quantity; }
 	
+	/**
+	 * Gets the owned status of the stock
+	 * @return - A boolean indicating if the stock is owned or is on the watch list
+	 */
 	public boolean getOwnedStatus() { return isOwned; }
 	
 	@Override
@@ -43,6 +84,7 @@ public class Stock  implements Serializable, Cloneable
 		return null;
 	}
 	
+	// Stock information variables
 	private int id;
 	private String name;
 	private float price;
@@ -50,5 +92,6 @@ public class Stock  implements Serializable, Cloneable
 	private int quantity;
 	private boolean isOwned;
 	
+	// Used for serialization purposes
 	private static final long serialVersionUID = 1L;
 }

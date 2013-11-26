@@ -12,13 +12,21 @@ import java.util.Iterator;
 import android.content.Context;
 
 /**
- * Model for the User Accounts, this class is used to communicate with the DB to fetch information, and to check account credentials accuracy
+ * Model for the User Accounts, this class is used to communicate with the DB to fetch information, manage users accounts and a whole and also each
+ * user account individually. It allows the creation of new accounts, and provides methods to change the password.
  * @author Pedro Miranda
  *
  */
 
 public class UserAccountsDB implements Iterable<UserAccount>
 {
+	/**
+	 * Construction for creating/loading the user accounts DB.
+	 * @param context - The context of the activity that calls this class.
+	 * @precondition - The DB is created/loaded from a class that extends activity.
+	 * @postcondition - The DB with all users will be loaded and can be accessed through
+	 * this class.
+	 */
 	public UserAccountsDB(Context context)
 	{
 		listOfUserAccounts = new ArrayList<UserAccount>();
@@ -27,30 +35,58 @@ public class UserAccountsDB implements Iterable<UserAccount>
 		loadAccounts();		
 	}
 	
+	/**
+	 * Verifies that there is a user account that exists matching the user name and password entered by the user.
+	 * @param userName - A String containing the user name the current user.
+	 * @param password - A String containing the password the users account.
+	 * @return - A boolean value  of true if the user name and password match an account or false if the is no account
+	 * that matches the entered credentials. 
+	 */
 	public boolean verifyCredentials(String userName, String password)
 	{
+		// Get an iterator for all the accounts in the database
 		Iterator<UserAccount> iterator = this.iterator();
 		UserAccount account;
 		
+		// Iterate through each user account searching for a match
 		while(iterator.hasNext())
 		{
+			// Get the new account in the Users Database
 			account = iterator.next();
 			
+			// Check is the credentials match the user account
 			if(account.getUserName().equals(userName) && account.getPasword().equals(password))
 			{
+				// The account was found, stop searching, get the user account, and return true.
 				curUser = account;
 				return true;
 			}
 		}
 		
+		// The account was not found or the password was incorrect, return false.
 		return false;
 	}
 	
+	/**
+	 * Gets a immutable copy of the current user's account who has logged into the system.
+	 * @return - A immutable copy of the current user's account.
+	 * @precondtion - verifyCredentials has been called and returned true, meaning there is a user logged into the system.
+	 */
 	public UserAccount getCurrentUser()
 	{
 		return (UserAccount)curUser.clone();
 	}
 	
+	/**
+	 * Creates a new user account as adds it to the database, granted the user name does not already exist and that
+	 * the password and confirm password match.
+	 * @param userName - A String containing the desired user name.
+	 * @param password - A String containing the desired password.
+	 * @param confPassword - A String containing the confirmation of the password entered above. 
+	 * @return - A message stating if the new user account was created successfully, the passwords do not match, or the username
+	 * already exists.
+	 * @throws UserAccountsExc - An exception if an error occurs during the password creation.
+	 */
 	public boolean createNewAccount(String userName, String password, String confPassword) throws UserAccountsExc
 	{
 		// Ensure All Fields are filled
@@ -84,16 +120,26 @@ public class UserAccountsDB implements Iterable<UserAccount>
 		return true;
 	}
 	
+	/**
+	 * Get the number of user accounts in the Database
+	 * @return - An integer containing the number of accounts in the Database
+	 */
 	public int getNumOfAccounts()
 	{
 		return listOfUserAccounts.size();
 	}
 	
+	/**
+	 * Reloads all the accounts in the database.
+	 */
 	public void refresh()
 	{
 		loadAccounts();
 	}
 	
+	/**
+	 * Saves all the accounts in the Database, this it watch allows the data to persist when the user logs off and/or exists the system.
+	 */
 	private void saveAccounts()
 	{
 		try
@@ -114,6 +160,9 @@ public class UserAccountsDB implements Iterable<UserAccount>
 		}
 	}
 	
+	/**
+	 * Loads all the user accounts in the Database, if the database does not exist is creates a new one.
+	 */
 	@SuppressWarnings("unchecked")
 	private void loadAccounts()
 	{
@@ -146,6 +195,7 @@ public class UserAccountsDB implements Iterable<UserAccount>
 		return Collections.unmodifiableList(listOfUserAccounts).iterator();
 	}
 	
+	// Variables used by the UserAccountsDB
 	private ArrayList<UserAccount> listOfUserAccounts;
 	private Context context;
 	private UserAccount curUser;
