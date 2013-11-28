@@ -1,5 +1,8 @@
 package com.tradersgem;
 
+import com.tradersgem.lists.StockList;
+import com.tradersgem.loginSystem.UserAccount;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +14,7 @@ import android.widget.Button;
  * This is the controller for the home screen for the current user. This class connects with the Home view to display the UI to the user and it
  * receives commands from the user including My Stocks, Watch List, Sell Stocks and Statistics. This Controller receives the current user account
  * information from their the Login or NewUser Controller.
- * @author pedro
+ * @author pedro + Luiz 
  *
  */
 public class Home extends Activity 
@@ -59,7 +62,7 @@ public class Home extends Activity
 			{
 				// Pass the current user account to the OwnedStockList controller.
 				//Intent intent = new Intent(Home.this, StockList.class).putExtra("String", "MyStocks");
-				Intent intent = new Intent(Home.this, OwnedStockList.class).putExtra("String", curUserAccount.getUserName());
+				Intent intent = new Intent(Home.this, ListView.class).putExtra("String", curUserAccount.getUserName());
 				//Intent intent = new Intent(Home.this, CustomListViewAndroidExample.class).putExtra("String", curUserAccount.getUserName());
 				startActivity(intent);
 			}
@@ -67,7 +70,7 @@ public class Home extends Activity
 			else if(((Button)v).getId() == btWatchList.getId())
 			{
 				// Pass the current user account to the WatchList controller.
-				Intent intent = new Intent(Home.this, WatchedStockList.class).putExtra("String", curUserAccount.getUserName());
+				Intent intent = new Intent(Home.this, ListView.class).putExtra("String", curUserAccount.getUserName());
 				startActivity(intent);
 			}
 			// User clicked on the SellStocks button
@@ -78,6 +81,8 @@ public class Home extends Activity
 			// User clicked on the Statistics button
 			else if(((Button)v).getId() == btStatistics.getId())
 			{
+				Intent i= new Intent(Home.this,TGGraphView.class).putExtra("String", curUserAccount.getUserName());
+				startActivity(i);
 				// Pass the current user account to the Statistics controller.
 			}
 		}

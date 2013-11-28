@@ -6,8 +6,13 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="16" />
-
+        android:targetSdkVersion="18" />
+    
+    <uses-permission 
+        	android:name="android.permission.INTERNET"
+        	
+        />
+	 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -22,13 +27,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.tradersgem.MainActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity 
+            android:name="com.tradersgem.TGGraphView"
+            android:label="@string/graphViewTitle">
+            
+            
+            
+        </activity>
+        <activity 
+            android:name="com.tradersgem.ListView"
+            android:label="@string/listViewTitle"            >
+            
+        </activity>
+        <activity 
+            android:name="com.tradersgem.AddStock"
+            android:label="@string/addStock"
+            android:theme="@android:style/Theme.Holo.Dialog"
+            >
+            
+            
+        </activity>
         <activity android:name="NewUser"></activity>
         <activity android:name="Home"></activity>
-        <activity android:name="StockList"></activity>
-        <activity android:name="OwnedStockList"></activity>
-        <activity android:name="WatchedStockList"></activity>
-        <activity android:name="StockList2"></activity>
-        <activity android:name="CustomListViewAndroidExample"></activity>
+        
+        
     </application>
+    
 
 </manifest>

@@ -1,5 +1,11 @@
 package com.tradersgem;
 
+import com.tradersgem.Home;
+import com.tradersgem.R;
+import com.tradersgem.database.UserAccountsDB;
+import com.tradersgem.loginSystem.UserAccountsExc;
+
+//import android.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
