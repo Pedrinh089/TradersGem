@@ -7,5 +7,14 @@
         android:alphabeticShortcut="a"
         
         />
+    
+    <item
+        android:id="@+id/graphMenuItem"
+        android:title="@string/graphStock"
+        android:alphabeticShortcut="g"
+        
+        />
+    
+    
 
 </menu>

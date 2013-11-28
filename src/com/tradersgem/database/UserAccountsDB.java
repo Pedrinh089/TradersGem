@@ -129,6 +129,12 @@ public class UserAccountsDB implements Iterable<UserAccount>
 	 */
 	public int getNumOfAccounts()
 	{
+		/**
+		 * In order to prevent a null size, or incorrect current size
+		 * we refresh prior to getting the number of accounts;
+		 * 
+		 */
+		this.refresh();
 		return listOfUserAccounts.size();
 	}
 	

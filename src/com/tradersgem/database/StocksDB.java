@@ -18,7 +18,7 @@ import android.content.Context;
  * Model for the User's Stocks, this class is used to communicate with the DB to fetch information, manage user's stocks by providing the following
  * functionality. It allows the adding new stocks to the user's porfolio, searching for stocks, getting quantities of owned/watched stocks, and 
  * saving/loading stocks from the stock DB.
- * @author pedro
+ * @author pedro + Luiz 
  *
  */
 public class StocksDB implements Iterable<Stock>
@@ -65,7 +65,11 @@ public class StocksDB implements Iterable<Stock>
 		
 		return null;
 	}
-	
+	/**
+	 * The following stock aggregates to the list of stock .
+	 * @param stock
+	 * @return
+	 */
 	public boolean addNewStock(Stock stock)
 	{
 		listOfStocks.add(stock);
@@ -74,6 +78,37 @@ public class StocksDB implements Iterable<Stock>
 		saveStocks();		
 		
 		return true;
+	}
+	/**
+	 * The following function removes the stock from the list of stocks, 
+	 * which then takes it away from the database itself;
+	 * @precondition is such that stock is not null and corresponds correctly to 
+	 * its type;
+	 * @param stock
+	 * @return true, if stock has been removed successfully, false if not;
+	 */
+	public boolean removeStock( Stock stock)
+	{
+		
+		int i=0;
+		i=listOfStocks.size();
+		
+		while (i>0)
+		{
+			if (listOfStocks.get(i).equals(stock))
+			{
+				listOfStocks.remove(i);
+				saveStocks();
+				return true;
+			}
+			else 
+			{
+				i--;
+			}
+		}
+		
+		
+		return false;
 	}
 	
 	public int getQtyStocksOwned()
@@ -154,6 +189,12 @@ public class StocksDB implements Iterable<Stock>
 	{
 		// TODO Auto-generated method stub
 		return Collections.unmodifiableList(listOfStocks).iterator();
+	}
+	
+	public ArrayList<Stock> getStocks()
+	{
+		return listOfStocks;
+		
 	}
 	
 	private ArrayList<Stock> listOfStocks;

@@ -59,6 +59,13 @@ public class ListView extends Activity
     		Intent ii= new Intent(this,AddStock.class);
     		
     		startActivity ( ii);
+    		break;
+    		
+    	case R.id.graphMenuItem:
+    		Intent iii= new Intent(this, TGGraphView.class );
+    		
+    		startActivity (iii);
+    		break;
     		
     	}
     	

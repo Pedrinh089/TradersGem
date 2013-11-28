@@ -1,7 +1,16 @@
 package com.tradersgem.lists;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
+import android.content.Context;
+import android.util.Log;
+
+import com.tradersgem.database.StocksDB;
+import com.tradersgem.loginSystem.UserAccount;
 import com.tradersgem.stock.Stock;
 /**
  * This StockList class is a super class to sub list classes such as watchList and Portfolio;
@@ -11,52 +20,102 @@ import com.tradersgem.stock.Stock;
  * @author Florida
  *
  */
-public class StockList 
+public abstract class StockList implements List
 {
 
-	
-	public StockList()
+	/**
+	 * This is the constructor of StockList, the superClass of the all other
+	 * list related classes that contain stocks as their main dataStructure;
+	 * @precondition Context c && UserAccount uA are already defined and are not null;
+	 * 
+	 * @param c
+	 * @param uA
+	 */
+	public StockList(Context c, UserAccount uA)
 	{
 		/**
 		 * Begin by adding all the stocks from database into the stocklist.
 		 */
+		//super();
+		context=c;
+		userAccount=uA;
+		stocks= new ArrayList<Stock>();
+		
+		StocksDB stockDatabase= new StocksDB(context,userAccount.getUserName());
+		stockDatabase.refresh();
+		stocks=stockDatabase.getStocks();
+		
 		
 		/**
 		 * Then, add any additional stocks;
 		 */
-	}
-	
-	public void addStocks(Stock stock)
-	{
-		stocks.add(stock);
-	}
-	public void addStocks(Stock stock1, Stock stock2, Stock stock3)
-	{
-		stocks.add(stock1);stocks.add(stock2);stocks.add(stock3);
+		
 		
 	}
+	/**
+	 * This method adds stocks to the current stockList, which will be 
+	 * utilized by the other lists;
+	 * @precondition Stock is not null...
+	 * @param stock
+	 * @return true if everything was performed correctly;
+	 */
+	
+	public boolean addStocks(Stock stock)
+	{
+		try 
+		{
+			stocks.add(stock);
+			stockDatabase.addNewStock(stock);
+			stockDatabase.refresh();
+			return true;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			String error= "error has occured" + "\n"+ e.getMessage();
+			Log.d("StockList:addStocks(Stock)",error);
+			return false;
+		}
+		
+	}
+	
 	/**
 	 * Adding an array of stocks into the the stock list;
 	 * @param stock []
 	 */
 	
 	
-	public void addStocks( Stock [] stock)
+	public boolean addStocks( Stock [] stock)
 	{
-		
-		int i=0;
-		while (i<stock.length)
+		try
 		{
-			stocks.add(stock[i]);
-			i++;
+			int i=0;
+			while (i<stock.length)
+			{
+				stocks.add(stock[i]);
+				stockDatabase.addNewStock(stock[i]);
+				i++;
+			}
+			stockDatabase.refresh();
+			return true;
 		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			String error= "error has occured" + "\n"+ e.getMessage();
+			Log.d("StockList:addStocks(Stock)",error);
+			return false;
+		}
+		
 	}
 	/**
 	 * The method below deletes stocks from the arrayList, who then reports to the 
 	 * database. 
+	 * @return true if successfully removed, false if not;
+	 * @precondition Stock is not null and has all data fields correctly filled;
 	 * 
 	 */
-	public void deleteStocks(Stock stock)
+	public boolean deleteStocks(Stock stock)
 	{
 		int i=0;
 		i= stocks.size();
@@ -69,15 +128,49 @@ public class StockList
 			if(stocks.get(i).equals(stock))
 			{
 				stocks.remove(i);
-				return;
+				stockDatabase.removeStock(stock);
+				return true;
 			}
 			else
 			{
 				i--;
 			}
 		}
+		return false;
 		
 		
+	}
+	/**
+	 * returns all the stocks from the database;
+	 * @return ArrayList containing all stocks;
+	 */
+	public ArrayList<Stock> getAllStocks()
+	{
+		return stocks;
+	}
+	/**
+	 * return only owned stocks
+	 * @return Owned stocks from the database;
+	 */
+	public ArrayList<Stock> getOwnedStocks()
+	{
+		ArrayList<Stock> ownedStocks= new ArrayList<Stock>();
+		int i=0;
+		while (i<stocks.size())
+		{
+			if (stocks.get(i).getOwnedStatus())
+			{
+				ownedStocks.add(stocks.get(i));
+				i++;
+			}
+			else
+			{
+				i++;
+			}
+			
+			
+		}
+		return ownedStocks;
 		
 	}
 	
@@ -85,5 +178,38 @@ public class StockList
 	 * Declaring all the attributes 
 	 */
 	private static ArrayList<Stock> stocks;
+	private StocksDB stockDatabase;
+	private final UserAccount userAccount;
+	private Context context;
+	@Override
+	public boolean add(Object object) {
+		
+		
+		
+		return addStocks((Stock) object); 
+	}
+	
+	
+	@Override
+	public boolean addAll(Collection arg0) {
+		
+		int i=0;
+		boolean a=false;
+		while (i<stocks.size())
+		{
+			a=add(((ArrayList<Stock>) arg0).get(i));
+			i++;
+		}
+		
+		return a;
+	}
+	
+	@Override
+	public boolean remove(Object object) {
+		
+		return deleteStocks((Stock) object);
+		
+		 
+	}
 	
 }

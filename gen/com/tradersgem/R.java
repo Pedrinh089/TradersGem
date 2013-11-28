@@ -32,7 +32,7 @@ public final class R {
         public static final int NU_EtConfPassword=0x7f09000e;
         public static final int NU_EtPassword=0x7f09000d;
         public static final int NU_EtUserName=0x7f09000c;
-        public static final int action_settings=0x7f090028;
+        public static final int action_settings=0x7f090029;
         public static final int addStock=0x7f090012;
         public static final int addStockMenuItem=0x7f090027;
         public static final int b1=0x7f09000a;
@@ -50,6 +50,7 @@ public final class R {
         public static final int graph0Title=0x7f090014;
         public static final int graph1=0x7f09001a;
         public static final int graph1Title=0x7f090019;
+        public static final int graphMenuItem=0x7f090028;
         public static final int graphToolOpt0=0x7f090016;
         public static final int graphToolOpt1=0x7f090017;
         public static final int graphToolOpt2=0x7f090018;
@@ -106,6 +107,7 @@ public final class R {
         public static final int callWatchList=0x7f060004;
         public static final int graph0Title=0x7f060019;
         public static final int graph1Title=0x7f06001a;
+        public static final int graphStock=0x7f060028;
         public static final int graphToolOpt0=0x7f06001b;
         public static final int graphToolOpt1=0x7f06001c;
         public static final int graphToolOpt2=0x7f06001d;

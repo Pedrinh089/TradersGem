@@ -116,6 +116,9 @@ public class AddStock extends Activity implements OnClickListener
 			
 			
 			break;
+			
+		
+			
 		
 		}
 		

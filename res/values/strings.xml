@@ -62,6 +62,7 @@
 	<!--  Items to use for the ListView menu -->
 	
 	<string name="addStock">Add Stock</string>
+	<string name="graphStock">Graph</string>
     
     
 	

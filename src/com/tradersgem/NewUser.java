@@ -76,6 +76,8 @@ public class NewUser extends Activity
 						// New Account creation failed
 						Log.d("New User", "Account Creation Failed!!!");
 						Log.d("Information", "Account Creation Failed!!!");
+						Log.d("cration", "FAILEDDDD!!");// :'( 
+						
 					}
 				} catch (UserAccountsExc e) {
 					// TODO Auto-generated catch block
