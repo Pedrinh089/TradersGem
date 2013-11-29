@@ -1,8 +1,11 @@
 package com.tradersgem;
 
+import java.util.ArrayList;
+
 import com.tradersgem.lists.Portfolio;
 import com.tradersgem.lists.WatchList;
 import com.tradersgem.loginSystem.UserAccount;
+import com.tradersgem.stock.Stock;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -25,12 +29,19 @@ public class ListView extends Activity
 	{
 		//portfolio= new Portfolio(this,);
 	}
-	
+	/**
+	 *  the layout int of the listview
+	 * @return integer with the value of the layout listview;
+	 */
 	public static int getLayout()
 	{
-		return R.layout.listview;
+		int l=R.layout.listview;
+		return l;
 	}
-	
+	/**
+	 * gets the current activity;
+	 * @return
+	 */
 	public static Activity getActivity()
 	{
 		Activity activity= getActivity();
@@ -38,24 +49,21 @@ public class ListView extends Activity
 		return activity;
 		
 	}
-	
-	
-	
-	public void setDataView()
+	/**
+	 * This method takes in the arrayList and TableLayout to set and sets the tableLayout
+	 * based on the stock information provided; 
+	 * @param stocks
+	 * @param listTable
+	 * @precondition Assumes all variables being passed as parameters are not null
+	 * 
+	 */
+	public void setTableView(ArrayList<Stock> stocks, TableLayout listTable )
 	{
-		portfolio= new Portfolio(this,userName);
-        watchList= new WatchList(this,userName);
-        portfolioView= new TableLayout(this);
-        watchListView= new TableLayout(this);
-        TextView [] info= new TextView[3];
-        
-        TableRow row= new TableRow(this);
-        LinearLayout parent= (LinearLayout) findViewById(R.id.parent);
-        portfolio.refresh();
-        watchList.refresh();
-        
-        int i=0,j=0;
-        while(i<portfolio.size())
+		TextView[] info= new TextView[3];
+		TableRow row= new TableRow(this);
+		row.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
+		int i=0,j=0;
+		while(i<stocks.size())
         {
         	if (i>0)
         	{
@@ -65,22 +73,49 @@ public class ListView extends Activity
         		info=new TextView[3];
         	}
         	j=0;
-        	info[j].setText(""+portfolio.getStocks().get(i).getName());
-        	info[j+1].setText(""+portfolio.getStocks().get(i).getPrice());
-        	info[j+2].setText(""+portfolio.getStocks().get(i).getPrice());
+        	info[j].setText(""+stocks.get(i).getName());
+        	info[j+1].setText(""+stocks.get(i).getPrice());
+        	info[j+2].setText(""+stocks.get(i).getPrice());
         	while (j<3)
         	{
         		row.addView(info[j]);
         		j++; // going to the next spot in the array for text View;
         	}
-        	portfolioView.addView(row);
+        	listTable.addView(row);
         	i++; // going to the next stock in portfolio;
         }
-        
-        
-        
-        
+		
+		
+		
 	}
+	/**
+	 * The following series of methods refresh the view based on their parameters
+	 * The first two are specific to portfolio and watchlist, and then the third 
+	 * takes in both and refresh the view for both of them;
+	 * @param p
+	 * @param listTable
+	 */
+	public void refreshView(Portfolio p, TableLayout listTable)
+	{
+		p.refresh();
+		setTableView(p.getStocks(),listTable);
+	}
+	
+	public void refreshView(WatchList w, TableLayout listTable)
+	{
+		w.refresh();
+		setTableView(w.getWatchList(),listTable);
+	}
+	
+	public void refreshView (Portfolio p, WatchList w, TableLayout listTableP, TableLayout listTableW, LinearLayout parent)
+	{
+		p.refresh();
+		setTableView(p.getStocks(),listTableP);
+		w.refresh();
+		setTableView(w.getWatchList(),listTableW);
+		
+	}
+	
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +124,21 @@ public class ListView extends Activity
         bundle= savedInstanceState;
         userName=getIntent().getExtras().getString("userName");
         Log.d("Extras(userName)",""+ userName);
+        portfolio= new Portfolio(this,userName);
+        watchList= new WatchList(this,userName);
+        portfolioView= new TableLayout(this);
+        watchListView= new TableLayout(this);
+        portfolio.refresh();
+        watchList.refresh();
         
+        setTableView(portfolio.getStocks(),portfolioView);
+        setTableView(watchList.getWatchList(),watchListView);
+        
+        LinearLayout parent= (LinearLayout) findViewById(R.id.parent);
+        
+        parent.addView(portfolioView);
+        parent.addView(watchListView);
+        parent.refreshDrawableState();
         
         
         
@@ -97,11 +146,12 @@ public class ListView extends Activity
         
         
     }
-	/*
-	@Override
+	
+/*	@Override
 	protected void onResume()
 	{
-	
+		
+		
 	}
 	
 	@Override

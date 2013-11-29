@@ -1,8 +1,12 @@
 package com.tradersgem;
 
+import java.util.Date;
 import java.util.zip.Inflater;
 
 import com.tradersgem.R.id;
+import com.tradersgem.lists.Portfolio;
+import com.tradersgem.lists.WatchList;
+import com.tradersgem.stock.Stock;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,6 +22,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -37,7 +42,8 @@ public class AddStock extends Activity implements OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_stock_view);
-        
+        userName= getIntent().getExtras().getString("userName");
+        Log.d("username",userName);
         
         /**
          * Creating the button that controls the adding of the stock
@@ -83,35 +89,35 @@ public class AddStock extends Activity implements OnClickListener
 			String symbol= "";
 			symbol=symbolToAdd.getText().toString();
 			Log.d("Symbol retrieved", symbol);
-			String superName=super.getLocalClassName();
-			Log.d("SuperName",superName);
-			LayoutInflater layout= getLayoutInflater();
-			Log.d("layout inflater class", layout.getClass().toString());
+			
+			EditText priceToAdd= (EditText) findViewById(R.id.priceToAdd);
+			CheckBox ownCheckBox= (CheckBox) findViewById(R.id.ownCheck);
+			EditText quantityText= (EditText) findViewById(R.id.quantity);
 			
 			
-			TableRow row= new TableRow(this);
-			row.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT));
-			TextView s= new TextView(this);
-			s.setText(symbol);
+			Float price= Float.parseFloat(priceToAdd.getText().toString());
+			boolean own= ownCheckBox.isChecked();
+			int quantity= Integer.parseInt(quantityText.getText().toString());
+			Date date= new Date();
+			int id= (int) (Math.random()*100);
+			Log.d("id",""+ id);
+			Stock stock= new Stock( id,symbol,price,date,quantity,own);
 			
-			TextView f= new TextView (this);
-			f.setText("60.00");
+			if (own)
+			{
+				Portfolio portfolio= new Portfolio(this, userName);
+				portfolio.addStocks(stock);
+			}
+			else
+			{
+				WatchList watchList= new WatchList(this,userName);
+				watchList.addStocks(stock);
+			}
 			
-			TextView symR= new TextView(this);
-			symR.setText("70.00");
+		    
 			
-			
-			row.addView(s);
-			row.addView(f);
-			row.addView(symR);
-			boolean checkRow= false;
-			if (row==null)
-				checkRow=true;
-			Log.d("checkRow", ""+ row.getChildCount());
-			//((ViewGroup)watchList).addView(row);
-			
-			Intent i= new Intent (this, ListView.class);
-			
+			Intent i= new Intent (this, ListView.class).putExtra("userName", userName);
+			Log.d("extras in Intent i", i.getExtras().getString("userName"));
 			startActivity(i);
 			
 			
@@ -123,4 +129,8 @@ public class AddStock extends Activity implements OnClickListener
 		}
 		
 	}
+	
+	
+	private String userName;
+	
 }

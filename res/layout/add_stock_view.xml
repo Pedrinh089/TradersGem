@@ -8,27 +8,95 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
+        <TextView
+            android:id="@+id/symbolText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Symbol"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
         <EditText
             android:id="@+id/symbolToAdd"
-            android:layout_width="wrap_content"
+            android:layout_width="128dp"
             android:layout_height="wrap_content"
             android:ems="10" >
 
             <requestFocus />
         </EditText>
 
-        <Button
-            android:id="@+id/addStock"
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/priceText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add" />
-    </LinearLayout>
+            android:text="Price"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/symbolText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"	
-        android:text="Symbol"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <EditText
+            android:id="@+id/priceToAdd"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:ems="10" >
+
+            
+        </EditText>
+
+        
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/owned"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Owned? "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    	
+        <CheckBox
+            android:id="@+id/ownCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:height="30dip"
+            android:width="30dip" />
+    
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/quantityText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/quantity"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+        
+     </LinearLayout>
+	<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	    <Button
+	        android:id="@+id/addStock"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Add" />
+	</LinearLayout>
 
 </LinearLayout>
