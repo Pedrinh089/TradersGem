@@ -17,7 +17,7 @@ import com.tradersgem.stock.Stock;
  * StockList holds all the stocks from all the sublists that extend it .
  * It then makes the report to the database between the classes that have been added 
  * or subtracted from the sublists. 
- * @author Florida
+ * @author Luiz Medeiros
  *
  */
 public abstract class StockList implements List
@@ -31,7 +31,7 @@ public abstract class StockList implements List
 	 * @param c
 	 * @param uA
 	 */
-	public StockList(Context c, UserAccount uA)
+	public StockList(Context c, String uA)
 	{
 		/**
 		 * Begin by adding all the stocks from database into the stocklist.
@@ -41,7 +41,7 @@ public abstract class StockList implements List
 		userAccount=uA;
 		stocks= new ArrayList<Stock>();
 		
-		StocksDB stockDatabase= new StocksDB(context,userAccount.getUserName());
+		StocksDB stockDatabase= new StocksDB(context,userAccount);
 		stockDatabase.refresh();
 		stocks=stockDatabase.getStocks();
 		
@@ -149,37 +149,29 @@ public abstract class StockList implements List
 		return stocks;
 	}
 	/**
+	 * A method to be implemented by watchList that will return all stocks being 
+	 * watched;
+	 * @return all stocks being watched;
+	 */
+	public abstract ArrayList<Stock> getWatchList();
+	/**
 	 * return only owned stocks
 	 * @return Owned stocks from the database;
 	 */
-	public ArrayList<Stock> getOwnedStocks()
-	{
-		ArrayList<Stock> ownedStocks= new ArrayList<Stock>();
-		int i=0;
-		while (i<stocks.size())
-		{
-			if (stocks.get(i).getOwnedStatus())
-			{
-				ownedStocks.add(stocks.get(i));
-				i++;
-			}
-			else
-			{
-				i++;
-			}
-			
-			
-		}
-		return ownedStocks;
-		
-	}
+	public abstract ArrayList<Stock> getOwnedStocks();
+	/**
+	 * Refresh is an abstract method to be defined by each subclass;
+	 */
+	public abstract void refresh();
+	
+	
 	
 	/**
 	 * Declaring all the attributes 
 	 */
 	private static ArrayList<Stock> stocks;
 	private StocksDB stockDatabase;
-	private final UserAccount userAccount;
+	private final String userAccount;
 	private Context context;
 	@Override
 	public boolean add(Object object) {

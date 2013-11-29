@@ -62,7 +62,7 @@ public class Home extends Activity
 			{
 				// Pass the current user account to the OwnedStockList controller.
 				//Intent intent = new Intent(Home.this, StockList.class).putExtra("String", "MyStocks");
-				Intent intent = new Intent(Home.this, ListView.class).putExtra("String", curUserAccount.getUserName());
+				Intent intent = new Intent(Home.this, ListView.class).putExtra("userName", curUserAccount.getUserName());
 				//Intent intent = new Intent(Home.this, CustomListViewAndroidExample.class).putExtra("String", curUserAccount.getUserName());
 				startActivity(intent);
 			}
@@ -70,7 +70,7 @@ public class Home extends Activity
 			else if(((Button)v).getId() == btWatchList.getId())
 			{
 				// Pass the current user account to the WatchList controller.
-				Intent intent = new Intent(Home.this, ListView.class).putExtra("String", curUserAccount.getUserName());
+				Intent intent = new Intent(Home.this, ListView.class).putExtra("userName", curUserAccount.getUserName());
 				startActivity(intent);
 			}
 			// User clicked on the SellStocks button
@@ -81,7 +81,7 @@ public class Home extends Activity
 			// User clicked on the Statistics button
 			else if(((Button)v).getId() == btStatistics.getId())
 			{
-				Intent i= new Intent(Home.this,TGGraphView.class).putExtra("String", curUserAccount.getUserName());
+				Intent i= new Intent(Home.this,TGGraphView.class).putExtra("userName", curUserAccount.getUserName());
 				startActivity(i);
 				// Pass the current user account to the Statistics controller.
 			}

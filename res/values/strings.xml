@@ -52,7 +52,7 @@
 	<string name="listViewFinancialInfo">Financials</string>
 	<string name="listViewSimResults">Sim Results</string>
 	
-	<string name="listViewSymbolChild">FB</string>
+	<string name="listViewSymbolChild">Demo</string>
 	<string name="listViewFinancialInfoChild"> 39.39</string>
 	<string name="listViewSimResultsChild"> 30.309</string>
 	
